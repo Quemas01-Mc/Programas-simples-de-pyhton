@@ -1,48 +1,158 @@
 import os
 import random
-Carga = "#"
-for Carga in range(20):
-    print("",Carga)
+numeros="1234567890"
+caracteres=".,-/()¨ç´{}¿?*+!#@$%&Ç"
+letras="qwertyuiopasdfghjklñzxcvbnm"
+NombreVal = False
+while not NombreVal:
+    os.system("cls")
+    print('=======================================')
+    print('| -------- CASINO LA RATA  -----------|') 
+    print('=======================================') 
+    print('-----------  Bienvenido  --------------')
+    print('-------- Solo mayores de edad ---------')
+    print('=======================================')
+    print('-Donde vendemos mejor que otros lugares')
+    print('=======================================')
+    print('¿Cual es tu nombre?')
+    print('---------------------------------------') 
+    Nombre = str(input())
+    Hay_numeros =  False
+    Hay_caracteres = False
+    for error in  Nombre :
+        for Num in numeros:
+            if error == Num:
+                Hay_numeros = True
+        for  Carac in caracteres:
+            if error == Carac:
+                Hay_caracteres = True
+            
+    if Hay_numeros == True or Nombre == " ":
+        print('==================================')
+        print('Ingresaste un numeros solo letras')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        os.system("cls")
+        continue
+    elif Hay_caracteres == True:
+        print('==================================')
+        print('Ingresaste un caracteres solo letras')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        os.system("cls")
+        continue
+    else:
+        break
     
-    input()
-os.system("cls")
-print('=======================================')
-print('| -------- CASINO LA RATA  -----------|') 
-print('=======================================') 
-print('-----------  Bienvenido  --------------')
-print('-------- Solo mayores de edad ---------')
-print('=======================================')
-print('-Donde vendemos mejor que otros lugares')
-print('=======================================')
-print('¿Cual es tu nombre?')
-print('---------------------------------------') 
-Nombre = input()
-os.system("cls")
-print('=======================================')
-print(f'Hola {Nombre} ¿Qué edad tienes?') 
-print('---------------------------------------') 
-Edad=int(input("Ingrese su edad :  "))
-if Edad >= 18:
-        Bucle = 's'
-        TotalUni = 0 # Total de unidades (bebidas)
-        TotalCO = 0  # Total del consumo (bar)
-        TotalGa = 0  # Total ganado en juegos
-        DineroPa = 0 # Dinero puesto para apostar (inicial)
+EdadV = False
+Edad0 = 0 
+while True:
+    os.system("cls")
+    print('=======================================')
+    print(f'Hola {Nombre} ¿Qué edad tienes?') 
+    print('---------------------------------------') 
+    Edad=input("Ingrese su edad :  ")
+    Hay_letras =  False
+    Hay_caracteres = False
+    for error in  Edad :
+        for Let in letras:
+            if error == Let:
+                Hay_letras = True
+        for  Carac in caracteres:
+            if error == Carac:
+                Hay_caracteres = True
+            
+    if Hay_letras == True or Edad == " ":
+        print('==================================')
+        print('Ingresaste letras solo numeros')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        os.system("cls")
+        continue
+    elif Hay_caracteres == True:
+        print('==================================')
+        print('Ingresaste un caracteres solo numeros')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        os.system("cls")
+        continue
+    else:
+        Edad0 = int(Edad)
+        os.system("cls")
+        break
+
+if Edad0 >= 18:
+        Bucle = True
+        TotalUni = 0 
+        TotalCO = 0  
+        TotalGa = 0  
+        DineroPa = 0 
         dinero = 0
-        
-        # Mientras Bucle='s' Hacer
-        while Bucle == 's':
-            print('¿Qué activida deseas hacer?')
-            print('=========== Menu ============') 
-            print('1.Bar')
-            print('2.Juegos')
-            print('-----------------------------')
-            Opcion = int(input("Ingrese un numero 1,2 : "))
+        while Bucle == True:
             os.system("cls")
-            if Opcion == 1:
-                I = 's'
-                # Mientras I='s' Hacer
-                while I == 's':
+            print('=========== Menu ============') 
+            print('1.Bar------------------------')
+            print('2.Juegos---------------------')
+            print('_____________________________')
+            Opcion = input("Ingrese un numero 1,2 : ")
+            os.system("cls")
+            Hay_letras =  False
+            Hay_caracteres = False
+            for error in  Opcion :
+                for Let in letras:
+                    if error == Let:
+                        Hay_letras = True
+            for  Carac in caracteres:
+                    if error == Carac:
+                        Hay_caracteres = True
+                        
+                    
+            if Hay_letras == True or Nombre == " ":
+                print('==================================')
+                print('Ingresaste letras solo numeros')
+                print(':(')
+                print('Intentalo de nuevo')
+                print('===================================')
+                print('-----Enter para continuar----')
+                print('==================================')
+                input() 
+                os.system("cls")
+                continue
+            elif Hay_caracteres == True:
+                print('==================================')
+                print('Ingresaste un caracteres solo numeros')
+                print(':(')
+                print('Intentalo de nuevo')
+                print('===================================')
+                print('-----Enter para continuar----')
+                print('==================================')
+                input() 
+                os.system("cls")
+                continue
+            else:
+                Opcion = int(Opcion)
+                os.system("cls")
+                break
+                            
+        I = True 
+        if Opcion == 1:      
+                while I == True:
                     os.system("cls")
                     print('========= Menú de Licores =========')
                     print('1. Martini .............. $ 2.10') 
@@ -64,8 +174,8 @@ if Edad >= 18:
                         TotalUni = TotalUni+Unidades
                         Total = Chi * Costo
                         TotalCO = TotalCO+Total
-                        I = "n"
-                        Bucle="n"
+                        I = False
+                        Bucle= False
                     elif Comprar == 2:
                       print(f'Qué buena elección {Nombre} ¿Cuánto deseas llevar?')
                       print('--------------------------------------------------------') 
@@ -75,8 +185,8 @@ if Edad >= 18:
                       TotalUni = TotalUni+Unidades
                       Total = Chi * Costo
                       TotalCO = TotalCO+Total
-                      I = "n"
-                      Bucle="n"
+                      I = False
+                      Bucle=False
                     elif Comprar == 3 : 
                         print(f'Qué buena elección {Nombre} ¿Cuánto deseas llevar?')
                         print('--------------------------------------------------------')
@@ -86,9 +196,9 @@ if Edad >= 18:
                         TotalUni = TotalUni+Unidades
                         Total = Chi * Costo
                         TotalCO = TotalCO+Total
-                        I = "n"
-                        Bucle ="n"
-                    elif I == "s" :
+                        I = False
+                        Bucle = False
+                    else:
                         print('==================================')
                         print('Ingresaste un numero invalido')
                         print(':(')
@@ -98,25 +208,26 @@ if Edad >= 18:
                         print('==================================')
                         input() 
                         Bucle = 'n'
-                        I="s"
+                        continue
                         os.system("cls")
-                    else:
-                      print('Quieres hacer algo mas antes de irte s/n')
-                      print('----------------------------------------') 
-                      barOp=input("Escriba s/n : ")
-                      if barOp == "s":
-                        I = "s"
-                        Bucle = "s"
-                      elif barOp == "n" :
-                        I = "n"
-                        Bucle ="n" 
-            elif Opcion == 2:        
+                        
+                        
+                    print('Quieres hacer algo mas antes de irte s/n')
+                    print('----------------------------------------') 
+                    barOp=input("Escriba s/n : ")
+                    if barOp == "s":
+                        I = False
+                        Bucle = True
+                    elif barOp == "n" :
+                        I = False
+                        Bucle = False 
+        elif Opcion == 2:        
                 print(f'¿Cuánta plata quieres poner para apostar? {Nombre}')
                 print('---------------------------------------------------')
                 dinero = float(input())   
                 DineroPa = dinero
                 Juefo = 's'
-                # Mientras Juefo='s' Hacer
+               
                 while Juefo == 's':
                     print('==========================')
                     print('¿Qué quieres jugar?')
@@ -149,7 +260,7 @@ if Edad >= 18:
                         os.system("cls")
                     if Juego == '1':
                         Buc = 's'
-                        # Mientras Buc='s' Hacer
+                        
                         while Buc == 's':
                             os.system("cls")
                             print("===========================")
@@ -164,10 +275,10 @@ if Edad >= 18:
                             print('___________________________')
                             PoI = input()
                             
-                            Elnumero = random.randint(1, 50) # Simula Aleatorio(1,50)
+                            Elnumero = random.randint(1, 50)
                             es_par = Elnumero % 2 == 0
                             
-                            # Opción 1: Escogió Par
+                           
                             if PoI == '1':
                                 print('Escogiste par')
                                 print('==============')
@@ -175,7 +286,7 @@ if Edad >= 18:
                                     print(f'El número fue par: {Elnumero}')
                                     print('Ganaste')
                                     dinero += Apuesta
-                                    TotalGa += Apuesta # Se suma solo la ganancia
+                                    TotalGa += Apuesta 
                                     print(f'Ganaste en total: ${dinero:.2f}')
                                     print('============================')
                                 else:
@@ -189,7 +300,7 @@ if Edad >= 18:
                                     print('La casa gana')
                                     print('==============================')
                                     
-                            # Opción 2: Escogió Impar
+                            
                             elif PoI == '2':
                                 print('Escogiste impar')
                                 print('===============')
@@ -197,7 +308,7 @@ if Edad >= 18:
                                     print(f'El número fue impar: {Elnumero}')
                                     print('Ganaste')
                                     dinero += Apuesta
-                                    TotalGa += Apuesta # Se suma solo la ganancia
+                                    TotalGa += Apuesta 
                                     print(f'Ganaste en total: ${dinero:.2f}')
                                     print('============================')
                                 else:
@@ -211,7 +322,7 @@ if Edad >= 18:
                                     print('La casa gana')
                                     print('===============================')
                                     
-                            # Si pierde o se queda sin dinero
+                            
                             if dinero <= 0:
                                 print('Te quedaste sin dinero. Fin del juego.')
                                 Buc = 'n'
@@ -234,7 +345,7 @@ if Edad >= 18:
                             
                     elif Juego == '2':
                         Buc = 's'
-                        # Mientras Buc='s' Hacer
+                        
                         while Buc == 's':
                             print(f'Tu saldo es de: ${dinero:.2f}')
                             print('=========================')
@@ -253,52 +364,52 @@ if Edad >= 18:
                             os.system("cls")
                             
                             print('==============')
-                            Ga = random.randint(1, 3) # Simula Aleatorio(1,3) para la casa
+                            Ga = random.randint(1, 3) 
                             
-                            # Opciones de juego (Piedra, Papel, Tijera)
+                           
                             resultado = ""
                             
-                            # Opción 1: Jugador Piedra
+                            
                             if Op == '1':
                                 print('Elejiste piedra')
                                 print('===============')
-                                if Ga == 1: # Casa: Papel
+                                if Ga == 1:
                                     resultado = "pierde"
                                     print('Yo elegi papel')
-                                elif Ga == 2: # Casa: Tijera
+                                elif Ga == 2: 
                                     resultado = "gana"
                                     print('Yo elegi tijera')
-                                else: # Ga == 3, Casa: Piedra
+                                else: 
                                     resultado = "empate"
                                     print('Yo elegi piedra')
                             
-                            # Opción 2: Jugador Tijera
+                          
                             elif Op == '2':
                                 print('Elejiste tijeras')
-                                if Ga == 1: # Casa: Piedra
+                                if Ga == 1: 
                                     resultado = "pierde"
                                     print('Yo elegi piedra')
-                                elif Ga == 2: # Casa: Papel
+                                elif Ga == 2: 
                                     resultado = "gana"
                                     print('Yo elegi papel')
-                                else: # Ga == 3, Casa: Tijera
+                                else:
                                     resultado = "empate"
                                     print('Yo elegi tijera')
                                     
-                            # Opción 3: Jugador Papel
+                           
                             elif Op == '3':
                                 print('Elejiste papel')
-                                if Ga == 1: # Casa: Tijera
+                                if Ga == 1:
                                     resultado = "pierde"
                                     print('Yo elegi tijera')
-                                elif Ga == 2: # Casa: Piedra
+                                elif Ga == 2: 
                                     resultado = "gana"
                                     print('Yo elegi piedra')
-                                else: # Ga == 3, Casa: Papel
+                                else:
                                     resultado = "empate"
                                     print('Yo elegi papel')
                             
-                            # De Otro Modo: (Opción inválida)
+                           
                             else:
                                 print('==================================')
                                 print('Ingresaste un numero invalido')
@@ -307,12 +418,12 @@ if Edad >= 18:
                                 print('===================================')
                                 print('-----Enter para continuar----')
                                 print('==================================')
-                                input() # Simula Leer ok
-                                continue # Volver al inicio del ciclo Buc
+                                input() 
+                                continue 
                                 
                             print('============================')
                             
-                            # Mostrar resultados y actualizar dinero
+                           
                             if resultado == "gana":
                                 print('Tu ganaste')
                                 dinero += Apuesta
@@ -337,7 +448,7 @@ if Edad >= 18:
                                 print('============================')
                                 print(f'Dinero apostado $ {Apuesta:.2f}')
 
-                            # Si pierde o se queda sin dinero
+                            
                             if dinero <= 0:
                                 print('Te quedaste sin dinero. Fin del juego.')
                                 Buc = 'n'
@@ -356,9 +467,9 @@ if Edad >= 18:
                                     Juefo = 'n'
                                     
                     elif Juego == '3':
-                        # Carrera de caballos
+                        
                         buc3 = "s"
-                        # Selección de caballo
+                        
                         while buc3 == "s":
                             print("=============================")
                             print('A que caballo quieres apostar')
@@ -392,20 +503,20 @@ if Edad >= 18:
                                 print('===================================')
                                 print('-----Enter para continuar----')
                                 print('==================================')
-                                input() # Simula Leer ok
+                                input() 
                                 os.system("cls")
                                 buc3 = "s"
                                 
-                        # Monto a apostar
+                        
                         
                                 print(f'Ingresa el monto a apostar: mínimo $1, máximo ${dinero:.2f}') # [cite: 80]
                                 print('--------------------------------------------------------')
                                 Apuesta = float(input())
                         
                         
-                        # Simulación de la carrera (se reproduce la lógica de impresión del original)
                         
-                        # --- Etapa 1
+                        
+                        
                         os.system("cls")
                         print('-------|\__-------------------------------------------------------')
                         print(' ______|´ |)-----------------------------------------------------')
@@ -424,9 +535,9 @@ if Edad >= 18:
                         NUm = random.randint(1, 3)
                         os.system("cls")
                         
-                        # --- Etapa 2 (Los prints simulan el avance de los caballos)
+                        
                         if NUm == 1:
-                            # Posición: 2, 1, 3
+                            
                             print('------------------------|\__-------------------------------------')
                             print('----------------- ______|´ |)------------------------------------')
                             print('-----------------/  |2| /--------------------------------------') 
@@ -437,7 +548,7 @@ if Edad >= 18:
                             print(' ______|´ |)-----------------------------------------------------')
                             print('/  |3| /-------------------------------------------------------') 
                         elif NUm == 2:
-                             # Posición: 3, 2, 1
+                             
                             print('------------------------|\__-------------------------------------')
                             print('----------------- ______|´ |)------------------------------------')
                             print('-----------------/  |3| /--------------------------------------') 
@@ -461,13 +572,13 @@ if Edad >= 18:
                         print('===================================')
                         print('-----Enter para continuar----')
                         print('==================================')
-                        input() # Simula Leer KI
+                        input() 
                         NUm = random.randint(1, 3)
                         os.system("cls")
                         
-                        # --- Etapa 3
+                        
                         if NUm == 1:
-                            # Posición: 3, 1, 2
+                            
                             print('------------------------------------|\__--------------------------')
                             print('----------------------------- ______|´ |)------------------------')
                             print('-----------------------------/  |3| /--------------------------') 
@@ -478,7 +589,7 @@ if Edad >= 18:
                             print('----------------- ______|´ |)------------------------------------')
                             print('-----------------/  |2| /--------------------------------------') 
                         elif NUm == 2:
-                            # Posición: 1, 3, 2
+                        
                             print('------------------------------------|\__--------------------------')
                             print('----------------------------- ______|´ |)------------------------')
                             print('-----------------------------/  |1| /--------------------------') 
@@ -488,30 +599,30 @@ if Edad >= 18:
                             print('------------------------|\__-------------------------------------')
                             print('----------------- ______|´ |)------------------------------------')
                             print('-----------------/  |2| /--------------------------------------') 
-                        else: # NUm == 3
-                            # Posición: 1, 3, 2 (repetido en el original)
+                        else: 
+                            
                             print('------------------------------------|\__--------------------------')
                             print('----------------------------- ______|´ |)------------------------')
-                            print('-----------------------------/  |1| /--------------------------') # [cite: 93]
+                            print('-----------------------------/  |1| /--------------------------') 
                             print(' ----------------------------------------------------|\__--------')
                             print('-----------------------------------------------______|´ |)-------')
                             print('----------------------------------------------/  |3|   /---------')
                             print('------------------------|\__-------------------------------------')
                             print('----------------- ______|´ |)------------------------------------')
-                            print('-----------------/  |2| /--------------------------------------') # [cite: 94]
+                            print('-----------------/  |2| /--------------------------------------')
                             
                         print('===================================')
                         print('-----Enter para continuar----')
                         print('==================================')
-                        input() # Simula Leer KI
+                        input()
                         NUm = random.randint(1, 3)
                         os.system("cls")
                         
-                        # --- Etapa Final (Meta)
+                        
                         Ganador_ID = 0
                         
                         if NUm == 1:
-                            # Posición: 3, 2, 1 -> Ganador: 1 (Secretariat)
+                            
                             print('------------------------------------|\__--------------------------')
                             print('----------------------------- ______|´ |)------------------------')
                             print('-----------------------------/  |3| /--------------------------') 
@@ -522,7 +633,7 @@ if Edad >= 18:
                             print('-------------------------------------------------------______|´ |)')
                             print('------------------------------------------------------/  |1| /') 
                         elif NUm == 2:
-                            # Posición: 2, 1, 3 -> Ganador: 3 (Cigar)
+                            
                             print('------------------------------------|\__--------------------------')
                             print('----------------------------- ______|´ |)------------------------')
                             print('-----------------------------/  |2| /--------------------------') 
@@ -533,8 +644,8 @@ if Edad >= 18:
                             print('-------------------------------------------------------______|´ |)')
                             print('------------------------------------------------------/  |3| /') 
                             Ganador_ID = 3
-                        else: # NUm == 3
-                            # Posición: 1, 3, 2 -> Ganador: 2 (Justify)
+                        else: 
+                            
                             print('------------------------------------|\__--------------------------')
                             print('----------------------------- ______|´ |)------------------------')
                             print('-----------------------------/  |1| /--------------------------') 
@@ -549,10 +660,10 @@ if Edad >= 18:
                         print('===================================')
                         print('-----Enter para continuar----')
                         print('==================================')
-                        input() # Simula Leer KI
+                        input() 
                         os.system("cls")
                         
-                        # --- Resultado de la carrera
+                        
                         if Ganador_ID == 1:
                             Ganador_Nombre = "Secretariat"
                         elif Ganador_ID == 2:
@@ -582,7 +693,7 @@ if Edad >= 18:
                             print('La casa gana')
                             print('==============================')
 
-                        # Si pierde o se queda sin dinero
+                        
                         if dinero <= 0:
                             print('Te quedaste sin dinero. Fin del juego.')
                             buc3 = "n"
@@ -590,7 +701,7 @@ if Edad >= 18:
                             Bucle = 'n'
                             Juefo = 'n'
                         else:
-                            print('Quieres seguir juegando? s/n') # [cite: 101, 102, 103, 104, 105, 106]
+                            print('Quieres seguir juegando? s/n') 
                             print('----------------------------')
                             Ele = input().lower()
                             
@@ -603,7 +714,7 @@ if Edad >= 18:
                                 Bucle = 'n'
                                 Juefo = 'n'
                                 
-                    # De Otro Modo: (Juego inválido)
+                   
                     else:
                         print('==================================')
                         print('Ingresaste un numero invalido')
@@ -615,24 +726,24 @@ if Edad >= 18:
                         input() 
                         Juefo = 's'
                         
-            # De Otro Modo: (Opción de actividad inválida)
-            elif Bucle == "s":
-                 print('==================================')
-                 print('Ingresaste un numero invalido')
-                 print(':(')
-                 print('Intentalo de nuevo')
-                 print('===================================')
-                 print('-----Enter para continuar----')
-                 print('==================================')
-                 input() # Simula Leer ok
-                 Bucle = 's'
+           
+        elif Bucle == "s":
+            print('==================================')
+            print('Ingresaste un numero invalido')
+            print(':(')
+            print('Intentalo de nuevo')
+            print('===================================')
+            print('-----Enter para continuar----')
+            print('==================================')
+            input() 
+            Bucle = True
                 
-        # Bloque de pago y factura
+        
         os.system("cls")
         Descuento = 0.0
         TotalAPagar = TotalCO
         
-        # Si TotalUni>=3 Entonces
+        
         if TotalUni >= 3:
             Descuento = TotalCO * 0.1
             TotalAPagar = TotalCO - Descuento
