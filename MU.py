@@ -1,439 +1,944 @@
 import os
-import datetime
 import random
 
-# =======================================================
-# 1. INICIALIZACIÓN GLOBAL (NECESARIO PARA GUARDAR DATOS)
-# =======================================================
+numeros = "1234567890"
+caracteres = ".,-/()¨ç´{}¿?*+!#@$%&Ç"
+letras = "qwertyuiopasdfghjklñzxcvbnm"
 
-# Lista principal que almacenará TODOS los diccionarios de cita
-citas_agendadas_lista = []
-citas_agendadas = 0 
-citalis = "PENDIENTE"
+NombreVal = False
+while not NombreVal:
+    os.system("cls")
+    print('=======================================')
+    print('| -------- CASINO LA RATA  -----------|') 
+    print('=======================================') 
+    print('-----------  Bienvenido  --------------')
+    print('-------- Solo mayores de edad ---------')
+    print('=======================================')
+    print('-Donde vendemos mejor que otros lugares')
+    print('=======================================')
+    print('¿Cual es tu nombre?')
+    print('---------------------------------------') 
+    Nombre = str(input()) 
 
-# Definiciones de caracteres para validación (Fuera de los bucles para mejor práctica)
-LETRAS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-NUMEROS = '0123456789'
-CARACTERES_DECIMALES = '.,'
+    Hay_numeros = False
+    Hay_caracteres = False
+    Hay_letras_invalidas = False
+    
+    if Nombre == "":
+        pass 
+    else:
+        for char in Nombre:
+            for num in numeros:
+                if char == num:
+                    Hay_numeros = True
+            for carac in caracteres:
+                if char == carac:
+                    Hay_caracteres = True
+            
 
-# Definición de mensajes de error de longitud (como solicitaste)
-MENSAJE_EXCESO = "¡Error! Ingresaste más de diez números."
-MENSAJE_DEFECTO = "¡Error! Ingresaste menos de diez números."
-
-# =======================================================
-# BUCLE PRINCIPAL DEL PROGRAMA (MENÚ)
-# =======================================================
-
+    if Nombre == "":
+        print('==================================')
+        print('El nombre no puede estar vacio.')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        continue
+    elif Hay_numeros == True:
+        print('==================================')
+        print('Ingresaste numeros, solo se permiten letras y espacios')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        continue
+    elif Hay_caracteres == True:
+        print('==================================')
+        print('Ingresaste caracteres especiales, solo se permiten letras y espacios')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        continue
+    else:
+        NombreVal = True
+        break
+    
+Edad0 = 0 
 while True:
     os.system("cls")
-    print("--- MENÚ PRINCIPAL ---")
-    print("1. Reservación de citas")
-    print("2. Ver lista de citas agendadas")
-    print("3. Salir")
-    Opciones_del_menu = input("Pon un número: ").strip()
+    print('=======================================')
+    print(f'Hola {Nombre} ¿Qué edad tienes?') 
+    print('---------------------------------------') 
+    Edad = input("Ingrese su edad :  ")
 
-    if not Opciones_del_menu.isdigit():
-        os.system("cls")
+    Hay_letras = False
+    Hay_caracteres = False
+    Es_valido = True
+
+    if Edad == "":
+        Es_valido = False
+    else:
+        for char in Edad:
+            for let in letras:
+                if char == let:
+                    Hay_letras = True
+            for carac in caracteres:
+                if char == carac:
+                    Hay_caracteres = True
+            
+    if Edad == "":
         print('==================================')
-        print('Ingresaste un dato inválido. Solo números (1, 2 o 3).') 
-        print('====================================')
-        input('--- Presiona ENTER para continuar --')
+        print('La edad no puede estar vacia.')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
         continue
-
-    Opciones_del_menu = int(Opciones_del_menu)
-
-    if Opciones_del_menu == 1:
-        # =======================================================
-        # SOLICITUD DE NOMBRES
-        # =======================================================
-        Validacion = False
-        while not Validacion:
-            os.system("cls")
-            print("RESERVACIÓN DE CITAS") 
-            print("---------------------------------")
-            print("¿Cuáles son tus dos nombres?") 
-            print("Ejemplo : Juan José")
-            print("_________________________________")
-            Nombres_del_paciente = input("Nombres: ").strip()
-            
-            Hay_errores = False
-            for Error in Nombres_del_paciente:
-                if Error in NUMEROS:
-                    Hay_errores = True
-                    break
-            
-            if Hay_errores == True or len(Nombres_del_paciente) == 0:
-                os.system("cls")
-                print('==================================')
-                print('Ingresaste números o el campo está vacío. Solo letras.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            else:
-                Validacion = True
-        
-        # =======================================================
-        # SOLICITUD DE APELLIDOS
-        # =======================================================
-        Validacion = False
-        while not Validacion:
-            os.system("cls")
-            print("---------------------------------")
-            print("¿Cuáles son sus apellidos?")
-            print("Ejemplo : García López")
-            print("_________________________________")
-            Apellidos_del_paciente = input("Apellidos: ").strip()
-            
-            Hay_errores = False
-            for Error in Apellidos_del_paciente:
-                if Error in NUMEROS:
-                    Hay_errores = True
-                    break
-            
-            if Hay_errores == True or len(Apellidos_del_paciente) == 0:
-                os.system("cls")
-                print('==================================')
-                print('Ingresaste números o el campo está vacío. Solo letras.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            else:
-                Validacion = True
-
-        # =======================================================
-        # SOLICITUD DE EDAD
-        # =======================================================
-        Edad_valida = False
-        edad = 0
-        while not Edad_valida:
-            os.system("cls")
-            print("---------------------------------")
-            print("¿Cuántos años tienes?")
-            print("Ejemplo : 18")
-            print("_________________________________")
-            Edad_input = input("Edad: ").strip()
-            
-            Hay_Caracteres = False
-            Hay_Letras = False
-            
-            for Error in Edad_input:
-                if Error in CARACTERES_DECIMALES:
-                    Hay_Caracteres = True
-                    break
-                elif Error in LETRAS:
-                    Hay_Letras = True
-                    break
-            
-            if Hay_Caracteres == True:
-                os.system("cls")
-                print('==================================')
-                print('Ingresaste decimales, solo enteros.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            elif Hay_Letras == True:
-                os.system("cls")
-                print('==================================')
-                print('Ingresaste letras, solo números.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            elif len(Edad_input) == 0:
-                os.system("cls")
-                print('==================================')
-                print('El campo de edad no puede estar vacío.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            else:
-                edad = int(Edad_input)
-                if edad > 0 and edad < 120: # Límite superior razonable para edad
-                    Edad_valida = True
-                else:
-                    os.system("cls")
-                    print('==================================')
-                    print('Ingresaste una edad inválida (debe ser positiva y real).') 
-                    print('====================================')
-                    input('--- Presiona ENTER para continuar --')
-                    continue
-            
-        # =======================================================
-        # SOLICITUD DE ESPECIALIDAD DE CITA
-        # =======================================================
-        while True:
-            os.system("cls")
-            print("---------------------------------")
-            print("Elija el tipo de cita")
-            print("1. Medicina general")
-            print("2. Control medico")
-            print("3. Revision de medicamentos")
-            print("__________________________________")
-            Especialidad_input = input("Opción: ").strip()
-
-            if not Especialidad_input.isdigit():
-                 Especialidad = 0
-            else:
-                 Especialidad = int(Especialidad_input)
-
-            if Especialidad == 1:
-                Cita_de_paciente = "Medicina general"
-                break
-            elif Especialidad == 2:
-                Cita_de_paciente = "Control medico"
-                break
-            elif Especialidad == 3:
-                Cita_de_paciente = "Revision de medicamentos"
-                break
-            else:
-                os.system("cls")
-                print('==================================')
-                print('Ingresaste un dato inválido. Elige 1, 2 o 3.') 
-                print('====================================')
-                input('-- Presiona ENTER para continuar --')
-                continue 
-
-        # =======================================================
-        # SOLICITUD DE MOTIVO
-        # =======================================================
+    elif Hay_letras == True:
+        print('==================================')
+        print('Ingresaste letras, solo se permiten numeros')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        continue
+    elif Hay_caracteres == True:
+        print('==================================')
+        print('Ingresaste un caracteres, solo se permiten numeros')
+        print(':(')
+        print('Intentalo de nuevo')
+        print('===================================')
+        print('-----Enter para continuar----')
+        print('==================================')
+        input() 
+        continue
+    else:
+        Edad0 = int(Edad)
         os.system("cls")
-        print("------------------------------------------")
-        print("¿Cuál es su motivo para agendar esta cita?")
-        print("__________________________________________") 
-        Motivo = input("Motivo: ").strip()
+        break
 
-        # =======================================================
-        # SOLICITUD DE CÉDULA (CON VALIDACIÓN DE LONGITUD DE 10)
-        # =======================================================
-        ci = False
-        while not ci:
-            os.system("cls") 
-            print("------------------------------------------")
-            print("Ingrese su cédula (debe tener 10 dígitos y solo números):") 
-            print("__________________________________________")
-            Cedula = input("Cédula: ").strip()
+if Edad0 >= 18:
+    Bucle = True
+    TotalUni = 0 
+    TotalCO = 0  
+    TotalGa = 0  
+    DineroPa = 0 
+    dinero = 0
+    
+    while Bucle == True:
+        
+        OpcionValida = False
+        Opcion = ""
+        while not OpcionValida:
+            os.system("cls")
+            print('=========== Menu ============') 
+            print('1.Bar------------------------')
+            print('2.Juegos---------------------')
+            print('3.Salir----------------------')
+            print('_____________________________')
+            Opcion = input("Ingrese un numero 1,2 o 3 : ")
+            os.system("cls")
             
-            Hay_Caracteres = False
-            Hay_Letras = False
+            Hay_letras = False
+            Hay_caracteres = False
             
-            # Validación de formato (solo números)
-            for Error in Cedula:
-                if Error in CARACTERES_DECIMALES:
-                    Hay_Caracteres = True
-                    break
-                elif Error in LETRAS:
-                    Hay_Letras = True
-                    break 
-                    
-            if Hay_Caracteres or Hay_Letras:
-                os.system("cls")
-                print('==================================')
-                print('La cédula solo debe contener números enteros, sin letras ni símbolos.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            
-            # Validación de longitud (exactamente 10)
+            if Opcion == "":
+                Hay_caracteres = True 
             else:
-                longitud = len(Cedula)
+                for char in Opcion :
+                    for let in letras:
+                        if char == let:
+                            Hay_letras = True
+                    for carac in caracteres:
+                        if char == carac:
+                            Hay_caracteres = True
+            
+            if Hay_letras == True or Opcion == "":
+                print('==================================')
+                print('Ingresaste letras o esta vacio, solo se permiten numeros 1, 2 o 3')
+                print(':(')
+                print('Intentalo de nuevo')
+                print('===================================')
+                print('-----Enter para continuar----')
+                print('==================================')
+                input() 
+                continue
+            elif Hay_caracteres == True:
+                print('==================================')
+                print('Ingresaste caracteres especiales, solo se permiten numeros 1, 2 o 3')
+                print(':(')
+                print('Intentalo de nuevo')
+                print('===================================')
+                print('-----Enter para continuar----')
+                print('==================================')
+                input() 
+                continue
+            else:
                 
-                if longitud == 10:
-                    ci = True
-                elif longitud < 10:
-                    os.system("cls")
-                    print('==================================')
-                    print(MENSAJE_DEFECTO)
-                    print(f"Faltan {10 - longitud} números.")
-                    print('====================================')
-                    input('--- Presiona ENTER para continuar --')
-                    continue
-                else: # longitud > 10
-                    os.system("cls")
-                    print('==================================')
-                    print(MENSAJE_EXCESO)
-                    print(f"Sobran {longitud - 10} números.")
-                    print('====================================')
-                    input('--- Presiona ENTER para continuar --')
-                    continue
-        
-        # =======================================================
-        # SOLICITUD DE FECHA (DÍA)
-        # =======================================================
-        Day_ct = False
-        Hoy = datetime.datetime.now()
-        Dia = 0
-        while not Day_ct:
-            os.system("cls")
-            print("--- AGENDAMIENTO DE FECHA ---")
-            print(f"Mes actual: {Hoy.month:02d}")
-            print("¿Qué DÍA quiere su cita? (1-30)")
-            print(f"Ejemplo (Día actual): {Hoy.day:02d}")
-            fecha_de_citaD = input("Día: ").strip()
-            
-            # Validación de formato (Solo números)
-            Hay_Carcteres = False
-            Hay_Letras = False
-            for Error in fecha_de_citaD:
-                if Error in CARACTERES_DECIMALES or Error in LETRAS:
-                    Hay_Carcteres = True
+                Opcion_int = int(Opcion)
+                if Opcion_int == 1 or Opcion_int == 2 or Opcion_int == 3:
+                    Opcion = Opcion_int
+                    OpcionValida = True
                     break
-
-            if Hay_Carcteres or len(fecha_de_citaD) == 0:
-                os.system("cls")
-                print('==================================')
-                print('Error: Ingrese solo números enteros para el día.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            else:
-                Dia = int(fecha_de_citaD)
-                # Validación de rango (1 a 30)
-                if Dia >= 1 and Dia <= 30:
-                    Day_ct = True
                 else:
-                    os.system("cls")
                     print('==================================')
-                    print(f'Ingresaste un día no existente ({Dia}). El rango debe ser entre 1 y 30.') 
-                    print('====================================')
-                    input('--- Presiona ENTER para continuar --')
+                    print('Ingresaste un numero invalido. Debe ser 1, 2 o 3.')
+                    print(':(')
+                    print('Intentalo de nuevo')
+                    print('===================================')
+                    print('-----Enter para continuar----')
+                    print('==================================')
+                    input() 
                     continue
-        
-        # =======================================================
-        # SOLICITUD DE FECHA (MES)
-        # =======================================================
-        Day_ct = False # Usamos la misma bandera, pero es mejor definir una nueva (Month_ct)
-        Month_ct = False
-        Mes = 0
-        while not Month_ct:
-            os.system("cls")
-            print("--- AGENDAMIENTO DE FECHA ---")
-            print("¿Qué MES quiere su cita? (1-12)")
-            print(f"Ejemplo (Mes actual): {Hoy.month:02d}")
-            fecha_de_citaM = input("Mes: ").strip()
 
-            # Validación de formato (Solo números)
-            Hay_Carcteres = False
-            Hay_Letras = False
-            for Error in fecha_de_citaM:
-                if Error in CARACTERES_DECIMALES or Error in LETRAS:
-                    Hay_Carcteres = True
-                    break
+        if Opcion == 1:      
+            I = True 
+            while I == True:
+                os.system("cls")
+                print('========= Menú de Licores =========')
+                print('1. Martini .............. $ 2.10') 
+                print('2. Negroni .............. $ 4.00') 
+                print('3. Jugo de mora ......... $ 2.50') 
+                print('===================================')
+                print('¿Qué deseas comprar? (Ingresa 1, 2 o 3)')
+                print('-----------------------------------') 
+                print('Puedes ganar un descuento si superas una compra de mas de 3 bebidas')
+                print('___________________________________________________________________')
+                
+                Comprar_str = input()
+                
+                
+                Hay_letras_compra = False
+                Hay_caracteres_compra = False
+                
+                if Comprar_str == "":
+                    Hay_caracteres_compra = True 
+                else:
+                    for char in Comprar_str:
+                        for let in letras:
+                            if char == let:
+                                Hay_letras_compra = True
+                        for carac in caracteres:
+                            if char == carac:
+                                Hay_caracteres_compra = True
+                
+                if Comprar_str == "" or Hay_letras_compra or Hay_caracteres_compra:
+                    print('==================================')
+                    print('Ingresaste un valor invalido . Solo 1, 2 o 3.')
+                    print(':(')
+                    print('Intentalo de nuevo')
+                    print('===================================')
+                    print('-----Enter para continuar----')
+                    print('==================================')
+                    input() 
+                    os.system("cls")
+                    continue
+                
+                Comprar = int(Comprar_str)
+                
+                
+                Costo = 0.0
+                if Comprar == 1:
+                    Costo = 2.10
+                elif Comprar == 2:
+                    Costo = 4.00
+                elif Comprar == 3: 
+                    Costo = 2.50
+                else:
+                    print('==================================')
+                    print('Ingresaste un numero invalido. Debe ser 1, 2 o 3.')
+                    print(':(')
+                    print('Intentalo de nuevo')
+                    print('===================================')
+                    print('-----Enter para continuar----')
+                    print('==================================')
+                    input() 
+                    os.system("cls")
+                    continue
+
+                
+                os.system("cls")
+                print(f'Qué buena elección {Nombre} ¿Cuánto deseas llevar?')
+                print('--------------------------------------------------------') 
+                
+                
+                Chi_str = input(": ")
+                Hay_letras_cant = False
+                Hay_caracteres_cant = False
+                
+                if Chi_str == "":
+                    Hay_caracteres_cant = True 
+                else:
+                    for char in Chi_str:
+                        for let in letras:
+                            if char == let:
+                                Hay_letras_cant = True
+                        for carac in caracteres:
+                            if char == carac:
+                                Hay_caracteres_cant = True
+                
+                if Chi_str == "" or Hay_letras_cant or Hay_caracteres_cant:
+                    print('==================================')
+                    print('Ingresaste una cantidad invalida '
+                          '. Solo números enteros.')
+                    print(':(')
+                    print('Intentalo de nuevo')
+                    print('===================================')
+                    print('-----Enter para continuar----')
+                    print('==================================')
+                    input() 
+                    os.system("cls")
+                    continue
+                
+                Chi = int(Chi_str)
+
+                if Chi <= 0:
+                    print('==================================')
+                    print('La cantidad debe ser mayor a 0.')
+                    print(':(')
+                    print('Intentalo de nuevo')
+                    print('===================================')
+                    print('-----Enter para continuar----')
+                    print('==================================')
+                    input() 
+                    os.system("cls")
+                    continue
+                
+                
+                Unidades = Chi 
+                TotalUni = TotalUni + Unidades
+                Total = Chi * Costo
+                TotalCO = TotalCO + Total
+                
+                os.system("cls")
+                print(f"Has añadido {Chi} unidades. Total acumulado en bar: ${TotalCO:.2f}")
+                print('===================================================================')
+                
+                
+                while True:
+                    print('Quieres hacer algo mas antes de irte s/n')
+                    print('------------------------------------------------------------')
+                    print('s: Volver al menú de licores del Bar')
+                    print('n: Ir al menú principal')
+                    print('------------------------------------------------------------')
+                    barOp = input("Escriba s/n : ")
                     
-            if Hay_Carcteres or len(fecha_de_citaM) == 0:
-                os.system("cls")
-                print('==================================')
-                print('Error: Ingrese solo números enteros para el mes.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            else:
-                Mes = int(fecha_de_citaM)
-                # Validación de rango (1 a 12)
-                if Mes >= 1 and Mes <= 12:
-                    Month_ct = True
-                else:
-                    os.system("cls")
-                    print('==================================')
-                    print(f'Ingresaste un Mes no existente ({Mes}). El rango debe ser entre 1 y 12.') 
-                    print('====================================')
-                    input('--- Presiona ENTER para continuar --')
-                    continue
-        
-        # =======================================================
-        # SOLICITUD DE HORA
-        # =======================================================
-        Hora_ct = False
-        Hora = 0
-        while not Hora_ct:
-            os.system("cls")
-            print("--- AGENDAMIENTO DE HORA ---")
-            print("Dime a qué HORA quieres tu cita (desde 8am hasta 15pm):") 
-            hora_de_cita = input("Hora (Formato 24h): ").strip()
+                    if barOp == "s":
+                        I = True 
+                        Bucle = True 
+                        break
+                    elif barOp == "n":
+                        I = False 
+                        break 
+                    else:
+                        print('==================================')
+                        print('Ingresaste una opcion invalida. Solo "s" o "n".')
+                        print(':(')
+                        print('Intentalo de nuevo')
+                        print('===================================')
+                        print('-----Enter para continuar----')
+                        print('==================================')
+                        input() 
+                        os.system("cls")
+                        continue
+            
 
-            # Validación de formato (Solo números)
-            Hay_Carcteres = False
-            Hay_Letras = False
-            for Error in hora_de_cita:
-                if Error in CARACTERES_DECIMALES or Error in LETRAS:
-                    Hay_Carcteres = True
+        elif Opcion == 2:
+            
+            if DineroPa == 0:
+                while True:
+                    os.system("cls")
+                    print(f'¿Cuánta plata quieres poner para apostar? {Nombre} (Solo números)')
+                    print('---------------------------------------------------')
+                    dinero_str = input()
+                    
+                    
+                    Hay_letras_dinero = False
+                    Hay_caracteres_dinero = False
+                    
+                    if dinero_str == "":
+                        Hay_caracteres_dinero = True
+                    else:
+                        try:
+                            dinero_val = float(dinero_str)
+                            for char in dinero_str:
+                                if char in letras:
+                                    Hay_letras_dinero = True
+                                if char in caracteres and char != '.':
+                                    Hay_caracteres_dinero = True
+                        except ValueError:
+                            Hay_letras_dinero = True 
+                            
+                    
+                    if dinero_str == "" or Hay_letras_dinero or Hay_caracteres_dinero:
+                        print('==================================')
+                        print('Ingresaste un valor invalido. Solo números.')
+                        print(':(')
+                        print('Intentalo de nuevo')
+                        print('===================================')
+                        print('-----Enter para continuar----')
+                        print('==================================')
+                        input() 
+                        continue
+                    
+                    dinero = float(dinero_str)
+                    if dinero <= 0:
+                        print('==================================')
+                        print('El dinero a apostar debe ser mayor a 0.')
+                        print(':(')
+                        print('Intentalo de nuevo')
+                        print('===================================')
+                        print('-----Enter para continuar----')
+                        print('==================================')
+                        input() 
+                        continue
+                    
+                    DineroPa = dinero 
                     break
 
-            if Hay_Carcteres or len(hora_de_cita) == 0:
+            Juefo = 's' 
+            while Juefo == 's':
                 os.system("cls")
-                print('==================================')
-                print('Error: Ingrese solo números enteros para la hora.') 
-                print('====================================')
-                input('--- Presiona ENTER para continuar --')
-                continue
-            else:
-                Hora = int(hora_de_cita)
-                # Validación de rango (8 a 15)
-                if Hora >= 8 and Hora <= 15:
-                    Hora_ct = True
+                print('==========================')
+                print(f'Tu saldo actual es de: ${dinero:.2f}')
+                print('¿Qué quieres jugar?')
+                print('======== Menú  ===========')
+                print('1.Es par o impar----------')
+                print('2.Piedra,Papel o Tijera---')
+                print('3.Carrera de caballos-----')
+                print('4.Volver al Menú Principal')
+                print('__________________________')
+                
+                Juego_str = input("Elija 1, 2, 3 o 4: ")
+                
+                
+                Hay_letras_juego = False
+                Hay_caracteres_juego = False
+                
+                if Juego_str == "":
+                    Hay_caracteres_juego = True
                 else:
-                    os.system("cls")
+                    for char in Juego_str:
+                        if char in letras:
+                            Hay_letras_juego = True
+                        if char in caracteres:
+                            Hay_caracteres_juego = True
+                
+                if Juego_str == "" or Hay_letras_juego or Hay_caracteres_juego:
                     print('==================================')
-                    print('Hora fuera del rango permitido (8 a 15).')
-                    print('====================================')
-                    input('--- Presiona ENTER para continuar --')
+                    print('Ingresaste un valor invalido. Solo números 1, 2, 3 o 4.')
+                    print(':(')
+                    print('Intentalo de nuevo')
+                    print('===================================')
+                    print('-----Enter para continuar----')
+                    print('==================================')
+                    input() 
+                    continue
+                
+                Juego = int(Juego_str)
+
+                
+                if Juego == 4:
+                    Juefo = 'n' 
+                    Bucle = True 
                     continue
 
-        # =======================================================
-        # REGISTRO Y GUARDADO DE CITA
-        # =======================================================
-        codigo = str(random.randint(10000, 99999))
-        
-        cita = {
-            "Codigo": codigo,
-            "Nombre": Nombres_del_paciente,
-            "Apellidos": Apellidos_del_paciente,
-            "Edad": edad,
-            "Cita para": Cita_de_paciente,
-            "Motivo": Motivo,
-            "Cedula": Cedula,
-            "Dia": Dia,
-            "Mes": Mes,
-            "Hora": Hora, 
-            "Estado": "PENDIENTE",
-        }
-        
-        # GUARDA LA CITA EN LA LISTA GLOBAL
-        citas_agendadas_lista.append(cita)
-        citas_agendadas += 1
-        
-        os.system("cls")
-        print("¡CITA AGENDADA CON ÉXITO!")
-        print(f"Código de cita: {codigo}")
-        print("\n--- Detalles de la cita ---")
-        for clave, valor in cita.items():
-            # Formateo mejorado para Fecha y Hora
-            if clave == "Dia" or clave == "Mes" or clave == "Hora":
-                 print(f"{clave}: {valor:02d}")
-            else:
-                 print(f"{clave}: {valor}")
-                 
-        input("\nENTER para volver al menú...")
+                
+                if Juego in [1, 2, 3]:
+                    
+                    
+                    LOP = "s"
+                    Apuesta = 0.0
+                    while LOP == "s":
+                        os.system("cls")
+                        print(f'Tu saldo es de: ${dinero:.2f}')
+                        print('==========================')
+                        print(f'Ingresa el monto a apostar: mínimo $1, máximo ${dinero:.2f}') 
+                        print('=======================================================')
+                        Apuesta_str = input()
+                        
+                        
+                        Hay_letras_apuesta = False
+                        Hay_caracteres_apuesta = False
+                        
+                        if Apuesta_str == "":
+                            Hay_caracteres_apuesta = True
+                        else:
+                            try: 
+                                Apuesta_val = float(Apuesta_str)
+                                for char in Apuesta_str:
+                                    if char in letras:
+                                        Hay_letras_apuesta = True
+                                    
+                                    if char in caracteres and char != '.':
+                                        Hay_caracteres_apuesta = True
+                            except ValueError:
+                                Hay_letras_apuesta = True 
+                                
+                        if Hay_letras_apuesta or Hay_caracteres_apuesta:
+                            print('==================================')
+                            print('Ingresaste un valor invalido. Solo números.')
+                            print(':(')
+                            print('Intentalo de nuevo')
+                            print('===================================')
+                            print('-----Enter para continuar----')
+                            print('==================================')
+                            input() 
+                            continue
+                        
+                        Apuesta = float(Apuesta_str)
+                        
+                        if Apuesta <= dinero and Apuesta >= 1:
+                            LOP = "n"
+                        else:
+                            print('==================================')
+                            print('El monto de la apuesta es invalido. Debe ser mínimo $1 y no superar tu saldo.')
+                            print(':(')
+                            print('Intentalo de nuevo')
+                            print('===================================')
+                            print('-----Enter para continuar----')
+                            print('==================================')
+                            input() 
+                            os.system("cls")
+                            continue
+                            
+                    
+                    if Juego == 1:
+                        Buc = 's'
+                        while Buc == 's':
+                            os.system("cls")
+                            print("===========================")
+                            print('Bienvenido a es par o impar')
+                            print('===========================')
+                            print(f'Apostaste: ${Apuesta:.2f}')
+                            print('Dime, ¿es par o impar?')
+                            print('===========================')
+                            print('1.Par')
+                            print('2.Impar')
+                            print('___________________________')
+                            
+                            PoI = input()
+                            
+                            
+                            if PoI not in ['1', '2']:
+                                print('==================================')
+                                print('Ingresaste una opcion invalida. Solo 1 o 2.')
+                                print(':(')
+                                print('Intentalo de nuevo')
+                                print('===================================')
+                                print('-----Enter para continuar----')
+                                print('==================================')
+                                input() 
+                                continue
+                            
+                            Elnumero = random.randint(1, 50)
+                            es_par = Elnumero % 2 == 0
+                            
+                            os.system("cls")
+                            
+                            if PoI == '1': 
+                                print('Escogiste par')
+                                print('==============')
+                                if es_par:
+                                    print(f'El número fue par: {Elnumero}')
+                                    print('Ganaste')
+                                    dinero += Apuesta
+                                    TotalGa += Apuesta 
+                                else:
+                                    print(f'El número fue impar: {Elnumero}')
+                                    print('Perdiste')
+                                    dinero -= Apuesta
+                                    
+                            elif PoI == '2': 
+                                print('Escogiste impar')
+                                print('===============')
+                                if not es_par:
+                                    print(f'El número fue impar: {Elnumero}')
+                                    print('Ganaste')
+                                    dinero += Apuesta
+                                    TotalGa += Apuesta 
+                                else:
+                                    print(f'El número fue par: {Elnumero}')
+                                    print('Perdiste')
+                                    dinero -= Apuesta
+                            
+                            print('============================')
+                            print(f'Tu saldo actual es: ${dinero:.2f}')
+                            print('============================')
+                            
+                            if dinero <= 0:
+                                print('Te quedaste sin dinero. Fin del juego.')
+                                Buc = 'n'
+                                Bucle = False
+                                Juefo = 'n'
+                            else:
+                                print('¿Quieres seguir jugando Par o Impar? s/n') 
+                                print('----------------------------')
+                                Ele = input()
+                                if Ele == 's':
+                                    Buc = 's'
+                                    if Apuesta > dinero:
+                                        LOP = "s" 
+                                        Buc = 'n' 
+                                        Juefo = 's' 
+                                    else:
+                                        os.system("cls")
+                                        pass
+                                else:
+                                    Buc = 'n'
+                                    Juefo = 's' 
+                                    os.system("cls")
+                                    
+                    
+                    elif Juego == 2:
+                        Buc = 's'
+                        while Buc == 's':
+                            os.system("cls")
+                            print(f'Tu saldo es de: ${dinero:.2f}')
+                            print('=========================')
+                            print(f'Apostaste: ${Apuesta:.2f}')
+                            print('===============')
+                            print('Elije entre :')
+                            print('===============')
+                            print('1.Piedra------|')
+                            print('2.Tijera------|') 
+                            print('3.Papel-------|')
+                            print('---------------')
+                            
+                            Op = input()
+                            os.system("cls")
+                            
+                            
+                            if Op not in ['1', '2', '3']:
+                                print('==================================')
+                                print('Ingresaste un numero invalido. Solo 1, 2 o 3.')
+                                print(':(')
+                                print('Intentalo de nuevo')
+                                print('===================================')
+                                print('-----Enter para continuar----')
+                                print('==================================')
+                                input() 
+                                continue 
+                                
+                            Ga = random.randint(1, 3) 
+                            
+                            resultado = ""
+                            
+                            
+                            if Op == '1': 
+                                print('Elegiste piedra')
+                                if Ga == 1: 
+                                    resultado = "empate"
+                                    print('Yo elegi piedra')
+                                elif Ga == 2: 
+                                    resultado = "gana"
+                                    print('Yo elegi tijera')
+                                else: 
+                                    resultado = "pierde"
+                                    print('Yo elegi papel')
+                            
+                            elif Op == '2': 
+                                print('Elegiste tijeras')
+                                if Ga == 1: 
+                                    resultado = "pierde"
+                                    print('Yo elegi piedra')
+                                elif Ga == 2: 
+                                    resultado = "empate"
+                                    print('Yo elegi tijera')
+                                else: 
+                                    resultado = "gana"
+                                    print('Yo elegi papel')
+                                    
+                            elif Op == '3': 
+                                print('Elegiste papel')
+                                if Ga == 1: 
+                                    resultado = "gana"
+                                    print('Yo elegi piedra')
+                                elif Ga == 2: 
+                                    resultado = "pierde"
+                                    print('Yo elegi tijera')
+                                else: 
+                                    resultado = "empate"
+                                    print('Yo elegi papel')
+                            
+                            
+                            print('============================')
+                            
+                            
+                            if resultado == "gana":
+                                print('Tu ganaste')
+                                dinero += Apuesta
+                                TotalGa += Apuesta
+                            elif resultado == "pierde":
+                                print('Yo gane (La casa gana)')
+                                dinero -= Apuesta
+                            elif resultado == "empate":
+                                print('Empate')
+                                print('Nadie gana')
+                                
+                            print('============================')
+                            print(f'Tu saldo actual es: ${dinero:.2f}')
+                            print('============================')
+                            
+                            if dinero <= 0:
+                                print('Te quedaste sin dinero. Fin del juego.')
+                                Buc = 'n'
+                                Bucle = False
+                                Juefo = 'n'
+                            else:
+                                print('Quieres seguir jugando Piedra, Papel o Tijera? s/n')
+                                print('----------------------------')
+                                Ele = input()
+                                
+                                if Ele == 's':
+                                    Buc = 's'
+                                    if Apuesta > dinero:
+                                        LOP = "s" 
+                                        Buc = 'n' 
+                                        Juefo = 's' 
+                                else:
+                                    Buc = 'n'
+                                    Juefo = 's' 
+                                    os.system("cls")
+                                    
+                    
+                    elif Juego == 3:
+                        
+                        buc3 = "s"
+                        
+                        while buc3 == "s":
+                            os.system("cls")
+                            print("=============================")
+                            print('A que caballo quieres apostar (1, 2, 3)')
+                            print("=============================")
+                            print('1.Secretariat')
+                            print('2.Justify')
+                            print('3.Cigar')
+                            print("-----------------------------")
+                            Caballo = input()
+                            
+                            NombreCA = ''
+                            ID = 0
+                            
+                            if Caballo == '1':
+                                NombreCA = 'Secretariat'
+                                ID = 1
+                                buc3 = "n"
+                            elif Caballo == '2':
+                                NombreCA = 'Justify'
+                                ID = 2
+                                buc3 = "n"
+                            elif Caballo == '3':
+                                NombreCA = 'Cigar'
+                                ID = 3
+                                buc3 = "n"
+                            else:
+                                print('==================================')
+                                print('Ingresaste un numero invalido. Solo 1, 2 o 3.')
+                                print(':(')
+                                print('Intentalo de nuevo')
+                                print('===================================')
+                                print('-----Enter para continuar----')
+                                print('==================================')
+                                input() 
+                                buc3 = "s"
+                                
+                        
+                        
+                        os.system("cls")
+                        print(f'Apostaste ${Apuesta:.2f} al caballo {NombreCA}')
+                        print('Inicia la carrera...')
+                        print('-----------------------------------')
+                        
+                        print('-------|\__-------------------------------------------------------')
+                        print(' ______|´ |)-----------------------------------------------------')
+                        print('/  |1| /-------------------------------------------------------') 
+                        print(' ----- |\__------------------------------------------------------')
+                        print(' ______|´ |)-----------------------------------------------------')
+                        print('/  |2|   /-------------------------------------------------------')
+                        print(' ------|\__------------------------------------------------------')
+                        print(' ______|´ |)-----------------------------------------------------')
+                        print('/  |3| /-------------------------------------------------------') 
+                        print('===================================')
+                        print('-----Enter para ver el avance 1----')
+                        print('==================================')
+                        input() 
+                        
+                        
+                        NUm_final = random.randint(1, 3) 
+                        Ganador_ID = NUm_final
+                        
+                        if Ganador_ID == 1:
+                            Ganador_Nombre = "Secretariat"
+                        elif Ganador_ID == 2:
+                            Ganador_Nombre = "Justify"
+                        else:
+                            Ganador_Nombre = "Cigar"
+                            
+                        
+                        os.system("cls")
+                        print('--- Resultado Final ---')
+                        
+                        
+                        print("========================")
+                        print(f"El ganador fue {Ganador_Nombre}")
+                        print("========================")
+                        print(f"Tu escojiste a {NombreCA}")
+                        print("========================")
+                        
+                        if ID == Ganador_ID:
+                            print("Ganaste, felicidades")
+                            dinero += Apuesta
+                            TotalGa += Apuesta
+                        else:
+                            print(f'Perdiste ${Apuesta:.2f}')
+                            dinero -= Apuesta
+                            print('La casa gana')
+                            
+                        print('============================')
+                        print(f'Tu saldo actual es: ${dinero:.2f}')
+                        print('============================')
 
-    # =======================================================
-    # 2. VER LISTA DE CITAS AGENDADAS
-    # =======================================================
-    elif Opciones_del_menu == 2:
-        os.system("cls")
-        print("===== LISTA DE CITAS AGENDADAS =====\n")
+                        
+                        if dinero <= 0:
+                            print('Te quedaste sin dinero. Fin del juego.')
+                            buc3 = "n"
+                            Bucle = False
+                            Juefo = 'n'
+                        else:
+                            print('Quieres seguir jugando Carreras? s/n') 
+                            print('----------------------------')
+                            Ele = input()
+                            
+                            if Ele == 's':
+                                Juefo = "s" 
+                                
+                                if Apuesta > dinero:
+                                        LOP = "s" 
+                                        buc3 = 'n' 
+                                        Juefo = 's' 
+                                else:
+                                    buc3 = "s" 
+                                os.system("cls")
+                            else:
+                                buc3 = "n"
+                                Juefo = 's' 
+                                os.system("cls")
+                                
+                   
+                    else: 
+                        print('==================================')
+                        print('Ingresaste un numero invalido. Debe ser 1, 2, 3 o 4.')
+                        print(':(')
+                        print('Intentalo de nuevo')
+                        print('===================================')
+                        print('-----Enter para continuar----')
+                        print('==================================')
+                        input() 
+                        Juefo = 's' 
+                
+                else: 
+                    print('==================================')
+                    print('Ingresaste un numero invalido. Debe ser 1, 2, 3 o 4.')
+                    print(':(')
+                    print('Intentalo de nuevo')
+                    print('===================================')
+                    print('-----Enter para continuar----')
+                    print('==================================')
+                    input() 
+                    Juefo = 's' 
         
-        if len(citas_agendadas_lista) == 0:
-            print("No hay citas agendadas.")
+        elif Opcion == 3:
+            Bucle = False
+
+
+    os.system("cls")
+    Descuento = 0.0
+    TotalAPagar = TotalCO
+    
+    
+    if TotalUni >= 3:
+        Descuento = TotalCO * 0.1
+        TotalAPagar = TotalCO - Descuento 
+        
+    
+    
+    PagOP = "s"
+    PagoET = ''
+    while PagOP == "s":
+        print(f'El total a pagar del bar es: ${TotalAPagar:.2f} (ya incluye descuento)')
+        print('========================================')
+        if DineroPa > 0:
+            print(f'Tu saldo final de apuestas es ${dinero:.2f}')
+            print(f'Total de dinero ganado : ${TotalGa:.2f}')
+        print('=======================================')
+        print('Como quieres pagar tu consumo del bar:')
+        print('================================')
+        print('1.Efectivo')
+        print('2.Tarjeta')
+        print('-------------------------------')
+        Pago_str = input("Elija un numero de 1/2 : ")
+        
+        
+        if Pago_str == '1':
+            PagoET = 'Efectivo'
+            PagOP = "n"
+        elif Pago_str == '2':
+            PagoET = 'Tarjeta'
+            PagOP = "n"
         else:
-            # Recorre la lista e imprime cada cita
-            print(f"Total de citas: {citas_agendadas}")
-            print("-------------------------------")
-            
-            for i, cita in enumerate(citas_agendadas_lista, 1):
-                print(f"--- Cita #{i} (Código: {cita['Codigo']}) ---")
-                print(f"Nombre: {cita['Nombre']} {cita['Apellidos']}")
-                print(f"Edad: {cita['Edad']}")
-                print(f"Cita para: {cita['Cita para']}")
-                print(f"Fecha: {cita['Dia']:02d}/{cita['Mes']:02d} - Hora: {cita['Hora']:02d}:00")
-                print(f"Estado: {cita['Estado']}")
-                print("-------------------------------")
-                
-        input("\nENTER para regresar al menú...")
+            print('==================================')
+            print('Ingresaste un numero invalido. Solo 1 o 2.')
+            print(':(')
+            print('Intentalo de nuevo')
+            print('===================================')
+            print('-----Enter para continuar----')
+            print('==================================')
+            input()
+            os.system("cls")
+            PagOP = "s"
+
+    os.system("cls")
+    print('====================================')
+    print('------- FACTURA DE COMPRA ----------') 
+    print('====================================')
+    print(f'Cliente: {Nombre}')
+    print('------------------------------------')
+    if TotalUni > 0:
+        print(f'Productos: {TotalUni:.0f} bebidas ')
+        print(f'Subtotal (Bebidas sin desc.): ${TotalCO:.2f}')
+        if TotalUni >= 3:
+            print(f'Descuento (10% por 3+ bebidas): ${Descuento:.2f}')
+        print('------------------------------------')
+        print(f'TOTAL A PAGAR (Bebidas): ${TotalAPagar:.2f}') 
+        print(f'Método de Pago: {PagoET}')
+    else:
+        print('No se realizaron compras de bebidas.')
+        
+    print('=======================================')
+    print('--------- Apuestas echas --------------')
+    print(f"Dinero inicial para apostar : ${DineroPa:.2f}")
+    print(f'Total de dinero ganado : ${TotalGa:.2f}')
+    print(f'Te retiras con el total de ${dinero:.2f}')
+    print('====================================')
+    print('      ¡Gracias por visitarnos!')
+    print('====================================')
+
+else:
+    print('--------------------------------------------------------------------')
+    print(f'Lo siento, {Nombre}, pero no tienes la edad necesaria para ingresar')
+    print(':(')
+    print('--------------------------------------------------------------------')
+    print(f'Esperamos su regreso {Nombre}')
+    print('================================')
